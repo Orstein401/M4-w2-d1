@@ -36,13 +36,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isGroundend = Physics.CheckSphere(checkerGround.position,radius,ground, QueryTriggerInteraction.Ignore);
+        isGroundend = Physics.CheckSphere(checkerGround.position, radius , ground);
+
         direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
         float vecLength = direction.magnitude;
         if (vecLength > 1)
         {
             direction /= vecLength;
         }
+
         move = new Vector3(direction.x, 0, direction.y);
         if (isGroundend)
         {
@@ -68,10 +71,11 @@ public class PlayerController : MonoBehaviour
         if (move != Vector3.zero)
         {
             transform.forward = Vector3.Lerp(transform.forward, move, speedRotation * Time.deltaTime);
+           
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            movement.Move(move * speedRun * Time.deltaTime);
+            movement.Move(move * speed*2 * Time.deltaTime);
         }
         else
         {
